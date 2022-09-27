@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: sa-bank-app-route
+  labels:
+    app: sa-bank-app
+spec:
+  to:
+    kind: Service
+    name: sa-bank-app-svc
+    weight: 100
+  port:
+    targetPort: 3002
+  wildcardPolicy: None

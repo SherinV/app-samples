@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sa-bank-app-svc
+  labels:
+    app: sa-bank-app
+spec:
+  type: NodePort
+  ports:
+    - port: 3002
+      targetPort: 3002
+      protocol: TCP
+  selector:
+    app: sa-bank-app
