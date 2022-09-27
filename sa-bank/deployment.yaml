@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: sa-bank-app-container
-        image: "quay.io/fxiang1/helloworld:0.0.test"
+        image: "quay.io/fxiang1/helloworld:0.0.1"
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 3002
