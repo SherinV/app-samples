@@ -1,0 +1,55 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: airline-app
+  generation: 3
+  namespace: airline
+  labels:
+    app: airline-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: airline-app
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: airline-app
+        department: reservations
+    spec:
+      containers:
+        - name: postgresql-13-rhel7
+          image: 'registry.redhat.io/rhscl/postgresql-13-rhel7:1-89'
+          env:
+            - name: POSTGRESQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: airline-app-config
+                  key: POSTGRESQL_DATABASE
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: airline-app-config
+                  key: POSTGRESQL_PASSWORD
+            - name: POSTGRESQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: airline-app-config
+                  key: POSTGRESQL_USER
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600

@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: airline-app-route
+  labels:
+    app: airline-app
+spec:
+  to:
+    kind: Service
+    name: airline-app-svc
+    weight: 100
+  port:
+    targetPort: 3003
+  wildcardPolicy: None

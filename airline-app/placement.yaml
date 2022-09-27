@@ -1,0 +1,10 @@
+apiVersion: apps.open-cluster-management.io/v1
+kind: PlacementRule
+metadata:
+  name: airline-app-placement
+  labels:
+    app: airline-app
+spec:
+  clusterSelector:
+    matchLabels:
+      env: dev
