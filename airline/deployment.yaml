@@ -27,7 +27,7 @@ spec:
                 secretKeyRef:
                   name: airline-app-config
                   key: POSTGRESQL_DATABASE
-            - name: POSTGRESQL_PASS
+            - name: POSTGRESQL_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: airline-app-config
