@@ -6,6 +6,7 @@ metadata:
   namespace: airline
   labels:
     app: airline-app
+    department: reservations
 spec:
   replicas: 1
   selector:
